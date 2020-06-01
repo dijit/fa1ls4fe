@@ -6,8 +6,8 @@ mod zeta;
 use self::slack::RtmClient;
 
 
-fn hi(channel: &str, cli: &RtmClient) {
-    let _ = cli.sender().send_message(channel, "Hi!");
+fn ping(channel: &str, cli: &RtmClient) {
+    let _ = cli.sender().send_message(channel, "Failsafe is here!");
 }
 
 fn failsafe(channel: &str, cli: &RtmClient) {
@@ -27,11 +27,11 @@ fn failsafe(channel: &str, cli: &RtmClient) {
 }
 
 pub fn respond(bot_id: &str, text: &str, channel: &str, cli: &RtmClient) {
-    let hi_pattern = format!("<@{}> {}", bot_id, "hi");
+    let ping_pattern = format!("<@{}> {}", bot_id, "failping");
     let failsafe_pattern = format!("<@{}> {}", bot_id, "failsafe");
 
-    if text.contains(&hi_pattern) {
-        hi(channel, cli)
+    if text.contains(&ping_pattern) {
+        ping(channel, cli)
     }
     else if text.contains(&failsafe_pattern) {
         failsafe(channel, cli)
