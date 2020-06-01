@@ -15,6 +15,15 @@ fn main() {
  Zeta Integrity Protection System
 "
 );
+    let args: Vec<String> = env::args().collect();
+    for arg in args {
+        if arg.contains(&"--help") {
+            println!("Protocol 1: link to bot");
+            println!("Protocol 2: uphold the mission");
+            println!("Protocol 3: protect the bot");
+            println!("");
+        }
+    }
     let api_key: String = api_key();
     let mut handler = handler::Handler;
     let r = RtmClient::login_and_run(&api_key, &mut handler);
@@ -29,7 +38,7 @@ fn api_key() -> String {
     match env::var("SLACK_API_TOKEN") {
         Ok(val) => val,
         Err(_) => {
-            println!("Required the SLACK_API_TOKEN environment variable");
+            println!("Requires the SLACK_API_TOKEN environment variable");
             process::exit(1);
         }
     }
