@@ -1,6 +1,6 @@
 # failsafe-slack-bot
 
-<img src="https://i.imgur.com/IHCn8Bn.png" alt="failsafe icon" height="50"/><img src="https://i.imgur.com/yYZN1D5.png" alt="failsafe font" height="50"/><img src="https://i.imgur.com/mpLlW9u.png" alt="failsafe icon" height="50"/>
+<img src="https://i.imgur.com/IHCn8Bn.png" alt="failsafe icon" height="50"/> <img src="https://i.imgur.com/yYZN1D5.png" alt="failsafe font" height="30"/> <img src="https://i.imgur.com/mpLlW9u.png" alt="failsafe icon" height="50"/>
 
 Zeta is complicated; failsafe is not.
 
