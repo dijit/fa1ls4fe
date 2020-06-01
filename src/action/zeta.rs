@@ -113,7 +113,7 @@ pub fn try_start() -> (bool, String) {
         let exit = s.get_exit_status().unwrap();
         match exit {
             0 => success=true,
-            _ => println!("Status is: {:?}", exit),
+            _ => println!("[✗] Script exit status is: {:?}", exit),
         }
         s.send_eof().unwrap();
         let mut buf=Vec::new();
@@ -121,7 +121,10 @@ pub fn try_start() -> (bool, String) {
             s.stdout().read_to_end(&mut buf).unwrap();
         } else {
             // FIXME: this will crash if there's nothing in the buffer.
-            s.stderr().read_to_end(&mut buf).unwrap();
+            match s.stderr().read_to_end(&mut buf) {
+                Ok(_) => {},
+                Err(error) => println!("Got error while trying to read stderr: {:?}", error),
+            }
         }
         return (
             success,
