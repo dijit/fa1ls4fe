@@ -1,0 +1,11 @@
+[package]
+name = "failsafe_slack_bot"
+version = "0.0.0"
+authors = ["Jan Harasym <jan.harasym@massive.se>"]
+
+[dependencies]
+slack     = "0.23.0"
+ssh       = "0.1.4"
+const_env = "0.1.2"
+
+
