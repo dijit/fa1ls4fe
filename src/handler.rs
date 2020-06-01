@@ -50,6 +50,9 @@ impl Handler {
         }
 
         let text: String = message_standard.text.unwrap();
+        if text.contains(&"!failsafe") {
+            return action::failsafe(&channel, &cli);
+        }
         if !text.contains(bot_id) {
             println!("[ℹ] ignoring non-mentioned message");
             return

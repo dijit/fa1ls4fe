@@ -8,7 +8,7 @@ fn ping(channel: &str, cli: &RtmClient) {
     let _ = cli.sender().send_message(channel, "Failsafe is here!");
 }
 
-fn failsafe(channel: &str, cli: &RtmClient) {
+pub fn failsafe(channel: &str, cli: &RtmClient) {
     zeta::send_script();
 
     let (success, message) = zeta::try_start();

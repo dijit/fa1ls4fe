@@ -61,22 +61,26 @@ fi
     let mut session=Session::new().unwrap();
     session.set_host(&HOST).unwrap();
     session.parse_config(None).unwrap();
-    session.connect().unwrap();
-    session.set_username(&USER).unwrap();
-    //session.userauth_publickey_auto(None).unwrap();
-    match session.userauth_password(&PASS) {
-        Ok(_) => {},
-        Err(_) => return,
-    }
-    {
-     let mut scp = session.scp_new(
-             WRITE, 
-             "/Users/jharasym/projects/external/errbot/")
-         .unwrap();
-     scp.init().unwrap();
-     let buf=script.as_bytes().to_vec();
-     scp.push_file("ensure_alive.sh",buf.len(),0o700).unwrap();
-     scp.write(&buf).unwrap();
+    match session.connect() {
+        Ok(_) => {
+            session.set_username(&USER).unwrap();
+            //session.userauth_publickey_auto(None).unwrap();
+            match session.userauth_password(&PASS) {
+                Ok(_) => {},
+                Err(_) => return,
+            }
+            {
+                let mut scp = session.scp_new(
+                        WRITE, 
+                        "/Users/jharasym/projects/external/errbot/")
+                    .unwrap();
+                scp.init().unwrap();
+                let buf=script.as_bytes().to_vec();
+                scp.push_file("ensure_alive.sh",buf.len(),0o700).unwrap();
+                scp.write(&buf).unwrap();
+            }
+        },
+        Err(error) => eprintln!("[✗] failed to transfer script: {:?}", error),
     }
 
 }
