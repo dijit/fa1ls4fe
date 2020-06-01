@@ -1,21 +1,20 @@
 extern crate slack;
 
-
 mod zeta;
 
 use self::slack::RtmClient;
-
 
 fn ping(channel: &str, cli: &RtmClient) {
     let _ = cli.sender().send_message(channel, "Failsafe is here!");
 }
 
 fn failsafe(channel: &str, cli: &RtmClient) {
-    // TODO: stuff
     zeta::send_script();
+
     let (success, message) = zeta::try_start();
     if !success {
-        let err = format!("[✗] Failed to activate failsafe, {}", &message);
+        let err = format!(
+            "[✗] Failed to activate failsafe, {}", &message);
         println!("{}", &err);
         let _ = cli.sender().send_message(channel, &err);
     } else {
