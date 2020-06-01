@@ -18,10 +18,10 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     for arg in args {
         if arg.contains(&"--help") {
-            println!("Protocol 1: link to bot");
-            println!("Protocol 2: uphold the mission");
-            println!("Protocol 3: protect the bot");
-            println!("");
+            println!("☶ Protocol 1: link to bot");
+            println!("☵ Protocol 2: uphold the mission");
+            println!("☳ Protocol 3: protect the bot");
+            println!("                              ℐℋ");
         }
     }
     let api_key: String = api_key();
