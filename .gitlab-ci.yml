@@ -1,5 +1,5 @@
 ---
-image: "rust:nightly"
+image: "rust:latest"
 
 stages:
   - test
@@ -16,7 +16,7 @@ test:cargo:
   stage: test
   script:
     - rustc --version && cargo --version
-    - cargo +nightly build --release --verbose
+    - cargo build --release --verbose
 
 build:cargo:
   stage: build
@@ -27,7 +27,7 @@ build:cargo:
     SLACK_API_TOKEN: ${SLACK_API_TOKEN}
   script:
     - rustc --version && cargo --version
-    - cargo +nightly build --release --verbose
+    - cargo build --release --verbose
     - strip target/release/failsafe_slack_bot
   artifacts:
     paths:
