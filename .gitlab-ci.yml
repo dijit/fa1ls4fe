@@ -1,5 +1,5 @@
 ---
-image: "rust:latest"
+image: "rust:nightly"
 
 stages:
   - test
@@ -25,10 +25,10 @@ build:cargo:
     SSH_USER: ${SSH_USER}
     SSH_PASS: ${SSH_PASS}
     SLACK_API_TOKEN: ${SLACK_API_TOKEN}
-  artifacts:
-    paths:
-      - target/release/
   script:
     - rustc --version && cargo --version
     - cargo +nightly build --release --verbose
     - strip target/release/failsafe_slack_bot
+  artifacts:
+    paths:
+      - target/release/
