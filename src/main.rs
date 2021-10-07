@@ -1,9 +1,15 @@
+extern crate const_env;
 extern crate failsafe_slack_bot;
 extern crate slack;
+
+use self::const_env::from_env;
 
 use failsafe_slack_bot::handler;
 use slack::RtmClient;
 use std::{env, process};
+
+#[from_env("SLACK_API_TOKEN")]
+const SLACK_API_TOKEN: &'static str = "placeholder_token";
 
 fn main() {
     println!(
@@ -11,8 +17,8 @@ fn main() {
   / __\\_ _(_) / _\\ __ _ / _| ___ 
  / _\\/ _` | | \\ \\ / _` | |_ / _ \\
 / / | (_| | | |\\ \\ (_| |  _|  __/
-\\/   \\__,_|_|_\\__/\\__,_|_|  \\___|
- Zeta Integrity Protection System
+\\/Zeta Integrity Protection System
+ 
 "
     );
     let mut help_output: bool = false;
@@ -31,7 +37,7 @@ fn main() {
         println!("                              ℐℋ");
         process::exit(0);
     }
-    let api_key: String = api_key();
+    let api_key: String = SLACK_API_TOKEN.to_owned();
     let mut handler = handler::Handler;
     loop {
         //FIXME: crash here every time we lose websocket connection
@@ -39,17 +45,7 @@ fn main() {
 
         match r {
             Ok(_) => {}
-            Err(err) => eprintln!(" ⚠️  Initiating restart sequence: due to a {}", err),
-        }
-    }
-}
-
-fn api_key() -> String {
-    match env::var("SLACK_API_TOKEN") {
-        Ok(val) => val,
-        Err(_) => {
-            println!("⚠️  ➡️ Requires the SLACK_API_TOKEN environment variable");
-            process::exit(1);
+            Err(err) => eprintln!("<!> Initiating restart sequence due to a {}", err),
         }
     }
 }
