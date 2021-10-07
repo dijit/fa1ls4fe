@@ -31,4 +31,4 @@ build:cargo:
     - strip target/release/failsafe_slack_bot
   artifacts:
     paths:
-      - target/release/
+      - target/release/failsafe_slack_bot
