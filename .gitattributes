@@ -1,1 +1,1 @@
-cargo -diff -merge
+cargo/** -diff -merge
