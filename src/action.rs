@@ -33,6 +33,7 @@ pub fn respond(bot_id: &str, text: &str, channel: &str, cli: &RtmClient) {
         ping(channel, cli)
     }
     else if text.contains(&failsafe_pattern) {
+        let _ = cli.sender().send_typing(channel);
         failsafe(channel, cli)
     }
 }
